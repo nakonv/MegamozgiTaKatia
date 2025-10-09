@@ -1,7 +1,11 @@
 Class Track:
   def __init__(self, name="", length=0, turns=0, complexity=0.0, grip=1.0):
-        self.name = name
-        self.length = length      #довжина кола (м)
-        self.turns = turns        #кількість поворотів
-        self.complexity = complexity  #коефіцієнт складності 
-        self.grip = grip        #зчеплення покриття з шинами
+    self.name = name
+    self.length = length      #довжина кола (м)
+    self.turns = turns        #кількість поворотів
+    self.complexity = complexity  #коефіцієнт складності 0-1
+    self.grip = grip        #зчеплення покриття з шинами
+  def getSectionSpeedFactor(self, sectionIndex):
+    base_factor = 1.0 - self.complexity * 0.5 - min(self.turns * 0.02, 0.3)
+    grip_factor = self.grip * 0.8 + 0.2
+    return base_factor * grip_factor
