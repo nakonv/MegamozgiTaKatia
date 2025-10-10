@@ -1,0 +1,8 @@
+class Driver:
+    def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk, rng=None):
+        self.name = name
+        self.aggression = self._norm01(aggression)
+        self.skill = self._norm01(skill)
+        self.mistakeChance = self._norm01(mistakeChance)
+        self.overtakingRisk = self._norm01(overtakingRisk)
+        self.rng = rng or random.Random()
