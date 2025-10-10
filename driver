@@ -6,3 +6,24 @@ class Driver:
         self.mistakeChance = self._norm01(mistakeChance)
         self.overtakingRisk = self._norm01(overtakingRisk)
         self.rng = rng or random.Random()
+
+    def printProfile(self):
+        print("Гонщик:", self.name)
+        print("  Агресивність:", self.aggression)
+        print("  Майстерність:", self.skill)
+        print("  Ймовірність помилки:", self.mistakeChance)
+        print("  Ризик при обгоні:", self.overtakingRisk)
+        
+    def makeMistake(self)
+        chance = self.mistakeChance * (1 - self.skill) * (o.8 + self.aggression * 0.2)
+        return random.random() < chance
+
+    def reactionTime(self)
+        base_time = 0.3
+        time = base_time - self.skill * 0.1 + self.aggression * 0.05
+        return time
+
+    def adoptedToTrack(self, track)
+        self.mistakeChance += track.complexity * 0.1 + (1 - track.grip) * 0.1
+        if self.mistakeChance > 1:
+            self.mistakeChance = 1
