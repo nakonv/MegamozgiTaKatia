@@ -5,12 +5,15 @@ Class Race:
     self.cars = [] #список машин
     self.drivers = [] #список водіїв
     self.results = {} #результати
+
   def addParticipant(self, driver, car): #додає машину і водія
     self.drivers.append(driver)
     self.cars.append(car)
+
   def startRace(self): #починає симуляцію гонки
     for lap in range(1, self.laps + 1):
       self.simulateLap(lap)
+
   def simulateLap(self, lapIndex):
     for i, car in enumerate(self.cars):
       driver = self.drivers[i]
@@ -19,8 +22,10 @@ Class Race:
       if driver.name not in self.results:
         self.results[driver.name] = 0
       self.results[driver.name] += section_time
+
   def sortedResults(self):
     return sorted(self.results.items(), key=lambda x: x[1])
+
   def saveResults(self, filename):
     with open(filename, "w", encoding="utf-8") as f:
       f.write("Результати гонки:\n")
