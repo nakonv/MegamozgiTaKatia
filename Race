@@ -1,14 +1,15 @@
-Class Race:
+class Race:
   def __init__(self, track, laps=3):
-    self.track = track #об'єкт класу трек
+    self.track = track #об'єкт класу трек, агрегація
     self.laps = laps #к-ть кіл 
-    self.cars = [] #список машин
-    self.drivers = [] #список водіїв
-    self.results = {} #результати
+    self.cars = [] #список машин, агрегація
+    self.drivers = [] #список водіїв, агрегація
+    self.results = [] #результати, композиця (RaceResult)
 
   def addParticipant(self, driver, car): #додає машину і водія
     self.drivers.append(driver)
     self.cars.append(car)
+    self.results.append(RaceResult(driver)) #композиція
 
   def startRace(self): #починає симуляцію гонки
     for lap in range(1, self.laps + 1):
@@ -17,23 +18,23 @@ Class Race:
   def simulateLap(self, lapIndex):
     for i, car in enumerate(self.cars):
       driver = self.drivers[i]
-      section_speed = car.speed * self.track.getSectionSpeedFactor(lapIndex)
+      current_result = self.results[i]
+
+      section_speed = car.calculate_speed(self.track.getSectionSpeedFactor(lapIndex))
       section_time = self.track.length / section_speed
-      if driver.name not in self.results:
-        self.results[driver.name] = 0
-      self.results[driver.name] += section_time
+      current_result.add_time(section_time)
+      car.update_wear()
 
   def sortedResults(self):
-    return sorted(self.results.items(), key=lambda x: x[1])
+    return sorted(self.results, key=lambda r: r.total_time)
 
   def saveResults(self, filename):
     with open(filename, "w", encoding="utf-8") as f:
       f.write("Результати гонки:\n")
-      sorted_results = self.sortedResults()
-      for place, (name, total_time) in enumerate(sorted_results, start=1):
-        f.write(f"{place}. {name}: {total_time:.2f} с\n")
+      for idx, r in enumerate(self.sortedResults(), start=1):
+        f.write(f"{idx}. {r.driver.name}: {r.total_time:.2f} с\n")
 
-Class RaceResult:
+class RaceResult:
   def __init__(self, driver):
       self.driver = driver
       self.total_time = 0.0
