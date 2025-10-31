@@ -32,3 +32,11 @@ Class Race:
       sorted_results = self.sortedResults()
       for place, (name, total_time) in enumerate(sorted_results, start=1):
         f.write(f"{place}. {name}: {total_time:.2f} с\n")
+
+Class RaceResult:
+  def __init__(self, driver):
+      self.driver = driver
+      self.total_time = 0.0
+    
+  def add_time(self, time):
+      self.total_time += time
