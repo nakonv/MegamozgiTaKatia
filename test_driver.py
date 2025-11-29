@@ -38,7 +38,7 @@ if __name__ == "__name__":
         m1 = d1.makeMistake()
         m2 = d2.makeMistake()
         print(
-            f"Подія {i:2d}: "
-            f"{d1.name} -> {'помилка' if m1 else 'ок'}, "
-            f"{d2.name} -> {'помилка' if m2 else 'ок'}"
+            f"Event {i:2d}: "
+            f"{d1.name} -> {'error' if m1 else 'ок'}, "
+            f"{d2.name} -> {'error' if m2 else 'ок'}"
         )
