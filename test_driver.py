@@ -28,7 +28,7 @@ if __name__ == "__name__":
     d1.printProfile()
     d2.printProfile()
 
-    # Опційно — показати час реакції
+    # час реакції
     print("\nReaction time:")
     print(f"{d1.name}: {d1.reactionTime():.3f} c")
     print(f"{d2.name}: {d2.reactionTime():.3f} c")
