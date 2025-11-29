@@ -1,3 +1,5 @@
+import random
+
 class Driver:
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk, rng=None):
         self.name = name
@@ -7,23 +9,28 @@ class Driver:
         self.overtakingRisk = self._norm01(overtakingRisk)
         self.rng = rng or random.Random()
 
+    def _norm01(self, x: float) ->float:
+        if x > 1:
+            x = x / 100.0
+        return max(0.0, min(1.0, x))
+
     def printProfile(self):
-        print("Гонщик:", self.name)
-        print("  Агресивність:", self.aggression)
-        print("  Майстерність:", self.skill)
-        print("  Ймовірність помилки:", self.mistakeChance)
-        print("  Ризик при обгоні:", self.overtakingRisk)
+        print("Driver:", self.name)
+        print("  Aggression:", self.aggression)
+        print("  Skill:", self.skill)
+        print("  Mistake chance:", self.mistakeChance)
+        print("  Overtaking risks:", self.overtakingRisk)
         
-    def makeMistake(self)
-        chance = self.mistakeChance * (1 - self.skill) * (o.8 + self.aggression * 0.2)
+    def makeMistake(self):
+        chance = self.mistakeChance * (1 - self.skill) * (0.8 + self.aggression * 0.2)
         return random.random() < chance
 
-    def reactionTime(self)
+    def reactionTime(self):
         base_time = 0.3
         time = base_time - self.skill * 0.1 + self.aggression * 0.05
-        return time
+        return max(0.05, time)
 
-    def adoptedToTrack(self, track)
+    def adoptedToTrack(self, track):
         self.mistakeChance += track.complexity * 0.1 + (1 - track.grip) * 0.1
         if self.mistakeChance > 1:
             self.mistakeChance = 1
