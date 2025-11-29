@@ -6,14 +6,11 @@ class TestTrack:        # модель траси для тестування
         self.complexity = complexity
         self.grip = grip
 
-print(">>> Файл test_driver.py ЗАПУСТИВСЯ <<<")
 
-
-print(">>> БЛОК if __name__ == '__main__' ЗАПУСТИВСЯ <<<")
 rng = random.Random(0)
 
-d1 = Driver("Hamilton", 70, 95, 5, 40, rng=rng)
-d2 = Driver("Verstappen", 90, 92, 7, 60, rng=rng)
+d1 = Driver("Hamilton",   70, 95, 40, 40, rng=rng) 
+d2 = Driver("Verstappen", 90, 92, 50, 60, rng=rng)  
 
 print("profile before adapted to track")
 d1.printProfile()
@@ -36,7 +33,7 @@ print(f"{d1.name}: {d1.reactionTime():.3f} c")
 print(f"{d2.name}: {d2.reactionTime():.3f} c")
 
 print("\nSimulation 10 event:")
-for i in range(1, 11):
+for i in range(1, 51):
     m1 = d1.makeMistake()
     m2 = d2.makeMistake()
     print(
