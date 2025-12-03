@@ -1,4 +1,5 @@
 import unittest
+import os
 from driver import Driver
 from Race import Race
 
@@ -64,12 +65,33 @@ class MyTestCase(unittest.TestCase):
 
         sorted_res = race.sortedResults()
 
-        # перший — найшвидший
         self.assertEqual(sorted_res[0].driver.name, "Tester2")
         self.assertEqual(sorted_res[1].driver.name, "Tester1")
+
+    def test_save_results(self):
+        track = MockTrack(5000)
+        race = Race(track, laps=1)
+
+        driver = Driver(name="Tester", aggression=0.3, skill=0.8, mistakeChance=0.1, overtakingRisk=0.2)
+        car = MockCar(250)
+
+        race.addParticipant(driver, car)
+        race.startRace()
+
+        filename = "test_results.txt"
+        race.saveResults(filename)
+
+        self.assertTrue(os.path.exists(filename))
+
+        with open(filename, "r", encoding="utf-8") as f:
+            content = f.read()
+            self.assertIn("Результати гонки", content)
+
+        os.remove(filename)
 
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
