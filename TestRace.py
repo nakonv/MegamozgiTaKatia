@@ -48,7 +48,28 @@ class MyTestCase(unittest.TestCase):
         total_time = race.results[0].total_time
         self.assertAlmostEqual(total_time, expected_time, places=4)
 
+    def test_sorted_results(self):
+        track = MockTrack(5000)
+        race = Race(track, laps=1)
+
+        d1 = Driver(name="Tester1", aggression=0.8, skill=0.7, mistakeChance=0.2, overtakingRisk=0.5)
+        c1 = MockCar(200)
+
+        d2 = Driver(name="Tester2", aggression=0.3, skill=0.8, mistakeChance=0.1, overtakingRisk=0.2)
+        c2 = MockCar(300)
+
+        race.addParticipant(d1, c1)
+        race.addParticipant(d2, c2)
+        race.startRace()
+
+        sorted_res = race.sortedResults()
+
+        # перший — найшвидший
+        self.assertEqual(sorted_res[0].driver.name, "Tester2")
+        self.assertEqual(sorted_res[1].driver.name, "Tester1")
+
 
 if __name__ == '__main__':
     unittest.main()
+
 
