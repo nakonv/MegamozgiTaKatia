@@ -1,4 +1,5 @@
 import unittest
+import os
 from track import Track
 
 
@@ -23,6 +24,28 @@ class MyTestCase(unittest.TestCase):
 
         self.assertAlmostEqual(factor, expected)
 
+    def test_loadFromFile(self):
+        #тимчасовий файл
+        filename = "track_data.txt"
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write("Spa\n")
+            f.write("7004\n")
+            f.write("20\n")
+            f.write("0.4\n")
+            f.write("0.9\n")
+
+        t = Track()
+        t.loadFromFile(filename)
+
+        self.assertEqual(t.name, "Spa")
+        self.assertEqual(t.length, 7004)
+        self.assertEqual(t.turns, 20)
+        self.assertEqual(t.complexity, 0.4)
+        self.assertEqual(t.grip, 0.9)
+
+        os.remove(filename)
+
 
 if __name__ == '__main__':
     unittest.main()
+
