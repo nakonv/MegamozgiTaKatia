@@ -27,6 +27,11 @@ class TestDriver(unittest.TestCase):
         self.d1.adoptedToTrack(self.track)
         self.d2.adoptedToTrack(self.track)
 
+        # Виводимо профілі водіїв після адаптації
+        print("\nProfile after adapting to track:")
+        self.d1.printProfile()
+        self.d2.printProfile()
+
     def test_reaction_time(self):
         # Перевірка часу реакції
         print("\nReaction time:")
