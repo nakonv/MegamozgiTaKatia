@@ -56,4 +56,4 @@ class TestDriver(unittest.TestCase):
         print("\nTests completed.")
 
 if __name__ == "__main__":
-    unittest
+    unittest.main()

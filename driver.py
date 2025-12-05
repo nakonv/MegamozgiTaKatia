@@ -7,7 +7,8 @@ class Driver:
         self.skill = self._norm01(skill)    # навички [0; 1]
         self.mistakeChance = self._norm01(mistakeChance)    # ймовірність помилки [0; 1]
         self.overtakingRisk = self._norm01(overtakingRisk)     # ризикованість під час обгону [0; 1]
-        self.rng = rng or random.Random()
+        #self.rng = rng or random.Random()
+        
 
     def _norm01(self, x: float) ->float:
         if x > 1:
