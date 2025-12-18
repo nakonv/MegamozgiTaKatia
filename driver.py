@@ -1,5 +1,6 @@
 import random
 from Race import RaceResult
+from Car import Car
 
 class Driver:
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk, rng=None):
