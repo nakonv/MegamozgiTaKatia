@@ -1,7 +1,7 @@
 from driver import Driver
 import random
 
-class RookieDriver(Driver):         #
+class RookieDriver(Driver):         # новачок (низька агресивність та навички, висока ймовірність помилки)
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk):
         super().__init__(name, aggression, skill, mistakeChance, overtakingRisk)
         self.aggression *= 0.5
@@ -11,7 +11,7 @@ class RookieDriver(Driver):         #
         chance = self.makeMistake * (1 - self.skill) * (0.8 + self.aggression * 0.3)
         return random.random() < chance
 
-class AggressiveDriver(Driver):       # 
+class AggressiveDriver(Driver):       # агресивний (висока агресивність і вища ймовірність помилки)
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk):
         super().__init__(name, aggression, skill, mistakeChance, overtakingRisk)
         self.aggression *= 1.5
@@ -20,7 +20,7 @@ class AggressiveDriver(Driver):       #
         chance = self.mistakeChance * (1 - self.skill) * (0.8 + self.aggression * 0.4)
         return random.random() < chance
     
-class CauiousDriver(Driver):
+class CauiousDriver(Driver):        # обережний (низька агресивність і низька імовірність помилки)
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk):
         super().__init__(name, aggression, skill, mistakeChance, overtakingRisk)
         self.aggression *= 0.5
@@ -30,7 +30,7 @@ class CauiousDriver(Driver):
         chance = self.mistakeChance * (1 - self.skill) * (0.6 + self.aggression * 0.2)
         return random.random() < chance
 
-class ExperiencedDriver(Driver):
+class ExperiencedDriver(Driver):        # досвідчений (високі навички і низька імовірність помилки)
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk):
         super().__init__(name, aggression, skill, mistakeChance, overtakingRisk)
         self.skill *= 1.2
@@ -45,7 +45,7 @@ class ExperiencedDriver(Driver):
         chance = self.mistakeChance * (1 - self.skill) * (0.6 + self.aggression * 0.2)
         return random.random() < chance
     
-class VeteranDriver(Driver):
+class VeteranDriver(Driver):         # старий (повільна реакція і підвищена імовірність помилки)
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk):
         super().__init__(name, aggression, skill, mistakeChance, overtakingRisk)
         self.aggression *= 0.7
