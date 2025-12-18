@@ -1,4 +1,5 @@
 import random
+from Race import RaceResult
 
 class Driver:
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk, rng=None):
@@ -7,7 +8,8 @@ class Driver:
         self.skill = self._norm01(skill)    # навички [0; 1]
         self.mistakeChance = self._norm01(mistakeChance)    # ймовірність помилки [0; 1]
         self.overtakingRisk = self._norm01(overtakingRisk)     # ризикованість під час обгону [0; 1]
-        #self.rng = rng or random.Random()
+        self.car = car
+        self.race_result = RaceResult(self)
         
 
     def _norm01(self, x: float) ->float:
@@ -35,3 +37,14 @@ class Driver:
         self.mistakeChance += track.complexity * 0.1 + (1 - track.grip) * 0.1
         if self.mistakeChance > 1:
             self.mistakeChance = 1
+
+    def drive(self, track_factor=1.0):      #Водій використовує машину для розрахунку швидкості
+        if self.car:
+            speed = self.car.calculate_speed(track_factor, driver=self)      # Передаємо водія в машину
+            print(f"{self.name} is driving at {speed:.2f} km/h")
+
+    def update_result(self, time):          #Оновлює результат гонки для водія
+        self.race_result.add_time(time)
+    
+    def get_result(self):       #Отримує результат гонки для водія
+        return self.race_result.get_total_time()
