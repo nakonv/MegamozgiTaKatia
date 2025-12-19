@@ -1,6 +1,24 @@
 from driver import Driver
 import random
 
+
+class DriverFactory:         # створення водіїв різних типів
+    @staticmethod
+    def create(driver_type, name, aggression, skill, mistakeChance, overtakingRisk):
+        if driver_type == "rookie":            # новачок
+            return RookieDriver(name, aggression, skill, mistakeChance, overtakingRisk)
+        elif driver_type == "aggressive":        # агресивний
+            return AggressiveDriver(name, aggression, skill, mistakeChance, overtakingRisk)
+        elif driver_type == "experienced":        # досвідчений
+            return ExperiencedDriver(name, aggression, skill, mistakeChance, overtakingRisk)
+        elif driver_type == "veteran":            # ветеран
+            return VeteranDriver(name, aggression, skill, mistakeChance, overtakingRisk)
+        elif driver_type == "cautious":            # обережний
+            return CautiousDriver(name, aggression, skill, mistakeChance, overtakingRisk)
+        else:
+            raise ValueError(f"Unknown driver type: {driver_type}")
+
+
 class RookieDriver(Driver):         # новачок (низька агресивність та навички, висока ймовірність помилки)
     def __init__(self, name, aggression, skill, mistakeChance, overtakingRisk):
         super().__init__(name, aggression, skill, mistakeChance, overtakingRisk)
