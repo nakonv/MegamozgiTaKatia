@@ -1,8 +1,8 @@
-from track_types import CityTrack, RaceTrack, WetTrack
+from track_types import CityTrack, RaceTrack, WetTrack, TrackFactory
 from race import Race
 
 def main():
-  track = WetTrack("Spa", 7004, 20, grip=0.7)
+  track = TrackFactory.create("wet", "Spa", 7004, 20, grip=0.7)
   race = Race(track, laps=3)
 
   #додати драйверів
