@@ -7,9 +7,17 @@ class Track:
     self.complexity = min(1.0, (self.turns / 10) * (1.0 - self.grip)) #коефіцієнт складності (0–1)
 
   def getSectionSpeedFactor(self, sectionIndex):
+    base = self.calculateBaseFactor()
+    modifier = self.trackModifier()
+    return base * modifier
+
+  def calculateBaseFactor(self):
     base_factor = 1.0 - self.complexity * 0.5 - min(self.turns * 0.02, 0.3)
     grip_factor = self.grip * 0.8 + 0.2
     return base_factor * grip_factor
+
+  def trackModifier(self):
+    return 1.0
 
   def loadFromFile(self, filename):
     with open(filename, "r", encoding="utf-8") as f:
