@@ -1,7 +1,8 @@
 
 import unittest
 import os
-from track import Track, CityTrack, RaceTrack, WetTrack
+from track import Track
+from track_types import CityTrack, RaceTrack, WetTrack
 
 
 class MyTestCase(unittest.TestCase):
@@ -78,4 +79,5 @@ class MyTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
