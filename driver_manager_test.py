@@ -18,29 +18,29 @@ class TestDriverManager(unittest.TestCase):
         cls.manager = DriverManadger(cls.drivers)
 
     def test_search_drivers_by_skill(self):
-        # Пошук водіїв з мінімальними навичками >= 0.7
+        # пошук водіїв з мінімальними навичками >= 0.7
         result = self.manager.search_drivers_by_skill(0.7)
 
-        # Перевірка результатів пошуку
+        # перевірка результатів пошуку
         self.assertEqual(len(result), 3)
         self.assertIn(self.drivers[1], result)  # "Driver 2"
         self.assertIn(self.drivers[2], result)  # "Driver 3"
         self.assertIn(self.drivers[3], result)  # "Driver 4"
 
     def test_search_drivers_by_aggression(self):
-        # Пошук водіїв з мінімальною агресивністю >= 0.7
+        # пошук водіїв з мінімальною агресивністю >= 0.7
         result = self.manager.search_drivers_by_aggression(0.7)
 
-        # Перевірка результатів пошуку
+        # перевірка результатів пошуку
         self.assertEqual(len(result), 2)
         self.assertIn(self.drivers[1], result)  # "Driver 2"
         self.assertIn(self.drivers[2], result)  # "Driver 3"
 
     def test_sort_drivers_by_skill(self):
-        # Сортуємо водіїв за навичками
+        # сортуємо водіїв за навичками
         sorted_drivers = self.manager.sort_drivers_by_skill()
 
-        # Перевірка правильності сортування
+        # перевірка правильності сортування
         self.assertEqual(sorted_drivers[0], self.drivers[2])  # "Driver 3"
         self.assertEqual(sorted_drivers[1], self.drivers[1])  # "Driver 2"
         self.assertEqual(sorted_drivers[2], self.drivers[3])  # "Driver 4"
@@ -48,10 +48,10 @@ class TestDriverManager(unittest.TestCase):
         self.assertEqual(sorted_drivers[4], self.drivers[0])  # "Driver 1"
 
     def test_sort_drivers_by_aggression(self):
-        # Сортуємо водіїв за агресивністю
+        # сортуємо водіїв за агресивністю
         sorted_drivers = self.manager.sort_drivers_by_aggression()
 
-        # Перевірка правильності сортування
+        # перевірка правильності сортування
         self.assertEqual(sorted_drivers[0], self.drivers[1])  # "Driver 2"
         self.assertEqual(sorted_drivers[1], self.drivers[2])  # "Driver 3"
         self.assertEqual(sorted_drivers[2], self.drivers[3])  # "Driver 4"
