@@ -45,3 +45,10 @@ class Car:
         self.fuel = max(0.0, self.fuel - fuel_consumption)
         self.tire_wear = min(100.0, self.tire_wear + tire_degradation)
         print(f"Оновлено: пальне = {self.fuel:.1f}%, зношеність шин = {self.tire_wear:.1f}%")
+
+def set_mode(self, mode):
+    self.mode = mode
+
+def apply_mode(self):
+    if hasattr(self, "mode") and self.mode:
+        self.mode.apply(self)
